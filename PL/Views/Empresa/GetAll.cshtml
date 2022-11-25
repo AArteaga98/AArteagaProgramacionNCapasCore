@@ -1,0 +1,71 @@
+﻿@model ML.Empresa
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h2>Empresa</h2>
+    @*<p>Aqui puedes ver, editar o agregar un Usuario</p>
+    <p>Para agregar un usuario presiona el boton verde</p>
+    <p>Para editar presione el amarillo</p>
+    <p>Para eliminar presiona el rojo</p>*@
+    <div class="row">
+        <div style="float:left">
+            @Html.ActionLink("+", "Form", "Empresa", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+
+                    <th> <center>Editar </center></th>
+                   
+                    <th> <center>Nombre </center></th>
+                    <th> <center>Telefono </center></th>
+                    <th> <center>E-mail </center></th>
+                    <th> <center>Direccion Web </center></th>
+                    <th> <center>Logo </center></th>
+              
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Empresa empresa in Model.Empresas)
+                {
+                    <tr>
+
+                        <td style="text-align: center; vertical-align: middle;"><a class="btn btn-warning" href="@Url.Action("Form", "Empresa", new { IdEmpresa = empresa.IdEmpresa })"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                        <td style="display :none;">@empresa.IdEmpresa </td>
+                        <td> <center>@empresa.Nombre  </center></td>
+                        <td> <center>@empresa.Telefono </center></td>
+                        <td> <center>@empresa.Email </center></td>
+                        <td> <center>@empresa.DireccionWeb </center></td>
+
+
+                        <td>
+                            <center>
+
+                            @if (empresa.Logo != null)
+                            {
+
+                                    <img id="Img" src="data:image/*;base64,@empresa.Logo" style="width:150px ; height:150px" />
+
+                            }
+                            else
+                            {
+                                <img id="Img" src="~/Imagenes/SinEmpresa.jpg" style="width:100px ; height:100px" />
+                            }
+                                </center>
+                        </td>
+
+
+                        <td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger" href="@Url.Action("Delete", "Empresa", new { IdEmpresa= empresa.IdEmpresa})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,157 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Usuario</h2>
+    @*<p>Aqui puedes ver, editar o agregar un Usuario</p>
+    <p>Para agregar un usuario presiona el boton verde</p>
+    <p>Para editar presione el amarillo</p>
+    <p>Para eliminar presiona el rojo</p>*@
+
+<div class="container">
+     <div class="row">
+    <div class="col-md-3">
+        <div style="float:left">
+            @Html.ActionLink("+", "Form", "Usuario", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+            </div>
+            </div>
+    <br />
+
+
+    
+        
+
+    
+        @using (Html.BeginForm("GetAll", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+
+               <div class="col-md-3">
+                @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @placeholder = "Apellido Paterno" })
+            </div>
+
+            <div class="col-md-3">
+                 <div class="input-group">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-search" style="color: blue"></i></span>
+                    <input type="submit" value="Buscar" class="btn btn-primary " />
+                 </div>
+            </div>
+
+            </div>
+
+        }
+
+   
+        </div>
+
+        <br />
+
+        <table class="table   table-hover table-bordered table-responsive" id="tblUsuario">
+            <thead>
+                <tr class="table-secondary">
+
+                    <th> <center>Editar </center></th>
+            
+                    <th> <center>Nombre </center></th>
+                    <th> <center>Fecha Nacimineto </center></th>
+                    <th> <center>Genero </center></th>
+                    <th> <center>UserName </center></th>
+                    <th> <center>Email </center></th>
+                 
+                    <th> <center>Telefono </center></th>
+                    <th> <center>Celular </center></th>
+                    <th> <center>CURP </center></th>
+                    <th> <center>Rol </center></th>
+                   <th> <center>Imagen </center></th>
+                   <th> <center>Direccion Calle</center></th>
+                   <th> <center> BORRAR</center></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Usuario usuario in Model.Usuarios)
+                {
+                    <tr>
+
+                        <td style="text-align: center; vertical-align: middle;"><a class="btn btn-warning" href="@Url.Action("Form", "Usuario", new { IdUsuario = usuario.IdUsuario })"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                       
+                        <td> <center>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno  </center></td>
+                        <td> <center>@usuario.FechaNacimiento </center></td>
+                        <td> <center>@usuario.Genero </center></td>
+                        <td> <center>@usuario.UserName </center></td>
+                        <td> <center>@usuario.Email </center></td>
+                      
+                        <td> <center>@usuario.Telefono </center></td>
+                        <td> <center>@usuario.Celular </center></td>
+                        <td> <center>@usuario.CURP </center></td>
+                       
+                        <td><center>@usuario.Rol.Nombre</center></td>
+
+
+                        <td>
+                    
+                            @if (usuario.Imagen != null)
+                            {
+
+                                <img id="Img" src="data:image/*;base64,@usuario.Imagen" style="width:150px ; height:150px" />
+
+                            }
+                            else
+                            {
+                                <img id="Img" src="~/Imagenes/SinUsuario.png" style="width:150px ; height:150px" />
+                            }
+                        </td>
+
+                        
+                        <td><center>@usuario.Direccion.Calle, @usuario.Direccion.NumeroInterior,@usuario.Direccion.NumeroExterior,@usuario.Direccion.Colonia.Nombre,@usuario.Direccion.Colonia.CP,@usuario.Direccion.Colonia.Municipio.Nombre,@usuario.Direccion.Colonia.Municipio.Estado.Nombre,@usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre</center></td>
+
+
+
+
+                        <td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger" href="@Url.Action("Delete", "Usuario", new { IdUsuario= usuario.IdUsuario})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+
+@section Scripts
+    {
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.material.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#tblUsuario').DataTable({
+                searching: false,
+                "lengthMenu": [[5, 10, 15, 20, -1], [ 5, 10, 15, 20, "All"]],
+                autoWidth: false,
+                columnDefs: [
+                    {
+                        targets: ['_all'],
+                        className: 'mdc-data-table__cell',
+                    },
+                ],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+                },
+            });
+        });
+    </script>
+
+}
+
