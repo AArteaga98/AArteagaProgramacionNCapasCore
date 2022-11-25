@@ -138,33 +138,9 @@ namespace PL.Controllers
 
             //Validacion 
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-
-
-              
-
-                usuario.Rol = new ML.Rol();
-
-                usuario.Direccion = new ML.Direccion();
-                usuario.Direccion.Colonia = new ML.Colonia();
-                usuario.Direccion.Colonia.Municipio = new ML.Municipio();
-                usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
-                usuario.Direccion.Colonia.Municipio.Estado.Pais = new ML.Pais();
-
-                ML.Result resultRol = BL.Rol.GetAll();
-                ML.Result resultPaises = BL.Pais.GetAll();
-
-                usuario.Rol.Roles = resultRol.Objects;
-                usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPaises.Objects;
-
-                return View(usuario);
-            }
-
-            else
-            {
-
-               ML.Result result = new ML.Result();
+                ML.Result result = new ML.Result();
 
                 if (usuario.IdUsuario == 0)
                 {
@@ -197,7 +173,32 @@ namespace PL.Controllers
 
                 return PartialView("Modal");
 
-               
+
+
+
+              
+            }
+
+            else
+            {
+
+
+                usuario.Rol = new ML.Rol();
+
+                usuario.Direccion = new ML.Direccion();
+                usuario.Direccion.Colonia = new ML.Colonia();
+                usuario.Direccion.Colonia.Municipio = new ML.Municipio();
+                usuario.Direccion.Colonia.Municipio.Estado = new ML.Estado();
+                usuario.Direccion.Colonia.Municipio.Estado.Pais = new ML.Pais();
+
+                ML.Result resultRol = BL.Rol.GetAll();
+                ML.Result resultPaises = BL.Pais.GetAll();
+
+                usuario.Rol.Roles = resultRol.Objects;
+                usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPaises.Objects;
+
+                return View(usuario);
+
             }
 
 
