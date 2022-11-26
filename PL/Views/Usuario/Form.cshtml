@@ -4,60 +4,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
+
     <h2>FORM</h2>
-    <div class="row">
-        <div class="col-md-12">
+   
+  
             @using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.LabelFor(model => model.IdUsuario, new { @class = "hidden" })
-                            @Html.TextBoxFor(model => model.IdUsuario, new { @class = "hidden form-control" })
+               
+                   
+                        <div class="col-md-3" style="display:none">
+                            @Html.LabelFor(model => model.IdUsuario, new { @class = "display:none" })
+                            @Html.TextBoxFor(model => model.IdUsuario, new { @class = "display:none form-control" })
                             @Html.ValidationMessageFor(model => model.IdUsuario)
 
                         </div>
-                    </div>
-
-                    <div class="form-group">
+                     
+                         <div class="container">
+                         <div class="row">
+                    
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Nombre)
-                            @Html.TextBoxFor(model => model.Nombre, new { @class = " form-control", @id = "txtNombre" })
+                            @*@Html.TextBoxFor(model => model.Nombre, new { @class = " form-control", @id = "txtNombre",  @onkeypress = "return SoloNumeros(event,'lblNombre')" })*@
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = " form-control", @id = "txtNombre",  @onkeypress = "return SoloLetras(event,'lblNombre')" })
                             @Html.ValidationMessageFor(model => model.Nombre)
+                            @Html.Label("",null, new {@id="lblNombre"})
+
+
 
                         </div>
-                    </div>
+                   
 
-                    <div class="form-group">
+                   
                         <div class="col-md-3">
 
 
                             @Html.LabelFor(model => model.ApellidoPaterno)
-                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno",  @onkeypress = "return SoloLetras(event,'lblApellidoPaterno')" })
                             @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                            @Html.Label("",null, new {@id="lblApellidoPaterno"})
                         </div>
-                    </div>
+                    
 
-                    <div class="form-group">
+                   
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.ApellidoMaterno)
-                            @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" , @id = "txtApellidoMaterno",  @onkeypress = "return SoloLetras(event,'lblApellidoMaterno')" })
                             @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                            @Html.Label("",null, new {@id="lblApellidoMaterno"})
+                            
                         </div>
-                    </div>
+                   
+                     
 
-                    <div class="form-group">
+                     
+                 
+                   
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.FechaNacimiento)
                             @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id="txtFechaNacimiento" })
                             @Html.ValidationMessageFor(model => model.FechaNacimiento)
 
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-3">
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.CURP)
+                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CURP)
+
+            </div>
+
+
+
+            <div class="col-md-3">
                             @Html.LabelFor(model => model.Genero)
                            @* @Html.TextBoxFor(model => model.Genero, new { @class = "form-control" })*@
 
@@ -68,9 +87,14 @@
                             @Html.ValidationMessageFor(model => model.Genero)
 
                         </div>
-                    </div>
 
-                    <div class="form-group">
+                        
+                           </div>
+                           </div>
+
+                           <div class="container">
+                         <div class="row">
+                   
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.UserName)
                             @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
@@ -78,63 +102,68 @@
                             @Html.ValidationMessageFor(model => model.UserName)
 
                         </div>
-                    </div>
-
-                    <div class="form-group">
+                   
+                    
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Email)
                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Email)
 
                         </div>
-                    </div>
+                    
 
-                    <div class="form-group">
+                    
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Password)
                             @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type = "password" })
                             @Html.ValidationMessageFor(model => model.Password)
 
                         </div>
-                    </div>
+                   
+                        </div>
+                           </div>
 
-                    <div class="form-group">
+                           <div class="container">
+                         <div class="row">
+                    
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Telefono)
-                            @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Telefono, new { @class = " form-control", @id = "txtTelefono",  @onkeypress = "return SoloNumeros(event,'lblTelefono')" })
                             @Html.ValidationMessageFor(model => model.Telefono)
+                            @Html.Label("",null, new {@id="lblTelefono"})
 
                         </div>
-                    </div>
+                    
 
-                    <div class="form-group">
+                    
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Celular)
-                            @Html.TextBoxFor(model => model.Celular, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Celular, new { @class = " form-control", @id = "txtCelular",  @onkeypress = "return SoloNumeros(event,'lblCelular')" })
                             @Html.ValidationMessageFor(model => model.Celular)
+                            @Html.Label("",null, new {@id="lblCelular"})
 
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            @Html.LabelFor(model => model.CURP)
-                            @Html.TextBoxFor(model => model.CURP, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.CURP)
 
                         </div>
-                    </div>
+                        </div>
 
-                    <div class="form-group">
+                          <div class="container">
+                         <div class="row">
+                    
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Rol.IdRol)
                             @*@Html.TextBoxFor(model => model.Rol.IdRol, new { @class = "form-control" })*@
                             @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona un rol", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Rol.IdRol)
                         </div>
-                    </div>
+                   
+                          </div>
+                        </div>
 
-                    <div class="form-group">
+                         <div class="container">
+                         <div class="row">
+                  
                         <div class="col-md-3">
 
                             @Html.LabelFor(model=> model.Imagen)
@@ -155,13 +184,16 @@
                         @Html.ValidationMessageFor(model => model.Imagen)
 
                         </div>
-                        </div>
+                        
                         @Html.HiddenFor(model => model.Imagen)
 
-                    
+                        </div>
+                        </div>
 
 
-                    <div class="form-group">
+                          <div class="container">
+                         <div class="row">
+                   
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
 
@@ -172,8 +204,9 @@
 
 
                         </div>
-                    </div>
-                    <div class="form-group">
+                  
+
+                    
                         <div class="col-md-3">
                             @if (Model.Direccion.Colonia.Municipio.Estado.Estados == null)
                             {
@@ -185,9 +218,9 @@
                                 @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Estados, "IdEstado", "Nombre"), "Seleciona un Estado", htmlAttributes: new { id = "ddlEstado", @class = "form-control" })
                             }
                         </div>
-                    </div>
+                   
 
-                    <div class="form-group">
+                   
                         <div class="col-md-3">
                             @if (Model.Direccion.Colonia.Municipio.Municipios == null)
                             {
@@ -199,45 +232,51 @@
                                 @Html.DropDownListFor(model => model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre"), "Seleciona un Municipio", htmlAttributes: new { id = "ddlMunicipio", @class = "form-control" })
                             }
                         </div>
-                    </div>
+                  
+                         </div>
+                        </div>
 
-                    <div class="form-group">
-                        <div class="col-md-3">
+                  
+                        <div class="col-md-3" style="display:none">
                             @Html.LabelFor(model => model.Direccion.IdDireccion, new { @class = "hidden" })
                             @Html.TextBoxFor(model => model.Direccion.IdDireccion, new { @class = " hidden form-control" })
                             @Html.ValidationMessageFor(model => model.Direccion.IdDireccion)
 
                         </div>
-                    </div>
 
-                    <div class="form-group">
+                           <div class="container">
+                         <div class="row">
+
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Direccion.Calle)
                             @Html.TextBoxFor(model => model.Direccion.Calle, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Direccion.Calle)
 
                         </div>
-                    </div>
+                   
 
-                    <div class="form-group">
+                   
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Direccion.NumeroInterior)
-                            @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Direccion.NumeroInterior)
+                            @Html.TextBoxFor(model => model.Direccion.NumeroInterior, new { @class = " form-control", @id = "txtNumeroInt",  @onkeypress = "return SoloNumeros(event,'lblNumeroInt)" })
+                            @Html.ValidationMessageFor(model => model.Direccion.NumeroExterior)
+                            @Html.Label("",null, new {@id="lblNumeroInt"})
                         </div>
-                    </div>
-                    <div class="form-group">
+                  
+
+                 
                         <div class="col-md-3">
 
                             @Html.LabelFor(model => model.Direccion.NumeroExterior)
-                            @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Direccion.NumeroExterior, new { @class = " form-control", @id = "txtNumeroExt",  @onkeypress = "return SoloNumeros(event,'lblNumeroExt)" })
                             @Html.ValidationMessageFor(model => model.Direccion.NumeroExterior)
+                            @Html.Label("",null, new {@id="lblNumeroExtt"})
 
 
                         </div>
-                    </div>
+                  
 
-                    <div class="form-group">
+
                         <div class="col-md-3">
                             @if (Model.Direccion.Colonia.Colonias == null)
                             {
@@ -249,15 +288,14 @@
                                 @Html.DropDownListFor(model => model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Seleciona una Colonia", htmlAttributes: new { id = "ddlColonia", @class = "form-control" })
                             }
                         </div>
-                    </div>
+                  
+                            </div>
+                        </div>
+                 
 
-
-
-
-
-
-                    <div class="form-group">
-
+                         <div class="container">
+                         <div class="row">
+                             
                         <div class="col-md-3">
 
                             <input type="submit" value="Guardar" class="btn btn-success" />
@@ -266,17 +304,15 @@
 
                         </div>
 
-                    </div>
+        </div>
+    </div>
 
-                </div>
+
+
 
             }
 
-        </div>
 
-    </div>
-
-</div>
 
 
 @section Scripts
@@ -399,6 +435,32 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+           function SoloNumeros(e, controlId) {
+        var caracter = e.key;
+        if (!/^[0-9]/g.test(caracter)) {
+            $('#' + controlId).text("Solo se aceptan numeros");
+            $('#' + controlId).css({ "color": "red" });
+            return false;
+        }
+        else {
+            $('#' + controlId).text("");
+            return true;
+        }
+         }
+
+         function SoloLetras(e, controlId) {
+        var caracter = e.key;
+        if (!/^[a-zA-Z ]/g.test(caracter)) {
+            $('#' + controlId).text("Solo se aceptan letras");
+            $('#' + controlId).css({ "color": "red" });
+            return false;
+        }
+        else {
+            $('#' + controlId).text("");
+            return true;
+        }
+         }
 
 
 </script>
