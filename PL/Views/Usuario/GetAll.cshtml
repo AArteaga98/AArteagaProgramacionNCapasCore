@@ -74,6 +74,7 @@
                     <th> <center>CURP </center></th>
                     <th> <center>Rol </center></th>
                    <th> <center>Imagen </center></th>
+                   <th> <center>Status </center></th>
                    <th> <center>Direccion Calle</center></th>
                    <th> <center> BORRAR</center></th>
                 </tr>
@@ -111,6 +112,28 @@
                                 <img id="Img" src="~/Imagenes/SinUsuario.png" style="width:150px ; height:150px" />
                             }
                         </td>
+                        
+                             <td>
+                    
+                            @if (usuario.Status )
+                            {
+
+                                 <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                                
+                                </div>
+
+                            }
+                            else
+                            {
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                            
+                        </div>
+                               
+                            }
+                        </td>
+
 
                         
                         <td><center>@usuario.Direccion.Calle, @usuario.Direccion.NumeroInterior,@usuario.Direccion.NumeroExterior,@usuario.Direccion.Colonia.Nombre,@usuario.Direccion.Colonia.CP,@usuario.Direccion.Colonia.Municipio.Nombre,@usuario.Direccion.Colonia.Municipio.Estado.Nombre,@usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre</center></td>

@@ -50,6 +50,7 @@ namespace BL
                             usuarioobj.Rol.IdRol = (byte)row.IdRol;
                             usuarioobj.Rol.Nombre = row.RolNombre;
                             usuarioobj.Imagen = row.Imagen;
+                            usuarioobj.Status = row.Status.Value;
 
                             usuarioobj.Direccion = new ML.Direccion();
                             usuarioobj.Direccion.Colonia = new ML.Colonia();
@@ -245,11 +246,36 @@ namespace BL
             return result;
         }
 
+        public static ML.Result ChangeStatus(ML.Usuario usuario)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.AarteagaProgramacionNcapasContext context = new DL.AarteagaProgramacionNcapasContext())
+                {
+                    //int query = context.UsuarioAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.FechaNacimiento, usuario.Genero, usuario.UserName, usuario.Email, usuario.Password, usuario.Telefono, usuario.Celular, usuario.CURP, usuario.Rol.IdRol, usuario.Imagen, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
+                    var usuarios = context.Database.ExecuteSqlRaw($"UsuarioChangeStatus {usuario.IdUsuario},{usuario.Status} ");
 
+                    if (usuarios > 0)
+                    {
+                        result.Message = "Status modificado con exito";
+                    }
+                }
+                result.Correct = true;
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.Ex = ex;
+                result.Message = "Ocurrio un error al modificar status" + result.Ex;
+
+            }
+            return result;
+        }
 
         //EXCEL{
 
-      
+
         public static ML.Result ConvertirExceltoDataTable(string connString)
         {
             ML.Result result = new ML.Result();

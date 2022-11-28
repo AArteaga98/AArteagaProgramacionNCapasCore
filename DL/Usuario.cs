@@ -33,6 +33,8 @@ public partial class Usuario
 
     public string? Imagen { get; set; }
 
+    public bool? Status { get; set; }
+
     public virtual ICollection<Aseguradora> Aseguradoras { get; } = new List<Aseguradora>();
 
     public virtual ICollection<Direccion> Direccions { get; } = new List<Direccion>();

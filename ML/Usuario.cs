@@ -36,7 +36,8 @@ namespace ML
         [Required]
         public string? UserName { get; set; }
 
-        [EmailAddress]
+        [Required]
+        //[EmailAddress]
         public string? Email { get; set; }
 
         [Required]
@@ -52,6 +53,7 @@ namespace ML
         [Required]
         [StringLength(18)]
         public string? CURP { get; set; }
+        public bool Status { get; set; }
 
 
    

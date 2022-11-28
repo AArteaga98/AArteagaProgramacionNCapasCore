@@ -69,8 +69,9 @@
 
             <div class="col-md-3">
                 @Html.LabelFor(model => model.CURP)
-                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.CURP, new { @class = "form-control",  @id="txtcurp", @onkeypress="return Curp(event,'lblCurp')" })
                 @Html.ValidationMessageFor(model => model.CURP)
+                @Html.Label("",null, new {@id="lblCurp"})
 
             </div>
 
@@ -106,8 +107,9 @@
                     
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Email)
-                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" , @id="user-email", @type="email" ,name="userEmail", @onchange="return validateEmail()" })
                             @Html.ValidationMessageFor(model => model.Email)
+                            @Html.Label("",null, new {@id="lblEmail"})
 
                         </div>
                     
@@ -115,11 +117,20 @@
                     
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.Password)
-                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type = "password" })
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type = "password", @id="password",  @onchange="return validatePassword()" })
                             @Html.ValidationMessageFor(model => model.Password)
+                            @Html.Label("Minimo 8 caracteres - Maximo 15 - Al menos una letra mayúscula - Al menos una letra minucula - Al menos un dígito - No espacios en blanco - Al menos 1 caracter especial",null, new {@id="lblPassword"})
 
                         </div>
-                   
+
+                        <div class="col-md-3">
+                                    <label>
+                                Confirm password:
+               
+                                <input type="password" name="confirm_password" id="confirm_password" onkeyup='check();' />
+                                <span id='message'></span>
+                           </label>
+                                 </div>
                         </div>
                            </div>
 
@@ -317,13 +328,16 @@
 
 @section Scripts
 {
+
+    <script src="email-validation.js"></script>
+
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
-
+    @*CALENDARIO*@
 
 <script type="text/javascript">
             $(function () {
@@ -425,7 +439,10 @@
 </script>
 
 
+@*VALIDACIONES NUM, LETRAS*@
+
 <script type="text/javascript">
+    
     function readUrl(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -462,9 +479,64 @@
         }
          }
 
-
 </script>
 
+ @*VALIDAR EMAIL*@
+
+    <script>
+     function validateEmail(){
+                
+	// Get our input reference.
+	var emailField = document.getElementById('user-email');
+	
+	// EXPRESION REGULAR
+	var validEmail =  /^\w+([.-_+]?\w+)*@@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+	// Usando test podemos verificar si el texto coincide
+	if( validEmail.test(emailField.value) ){
+		
+		return true;
+	}else{
+		alert('Email es invalido');
+		return false;
+	}
+} 
+
+    </script>
+
+    @*VALIDAR PASSWORD*@
+    <script>
+        function validatePassword() {
+
+            // Get our input reference.
+            var emailField = document.getElementById('password');
+
+            // EXPRESION REGULAR
+            var validEmail = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@@$!%*?&])([A-Za-z\d$@@$!%*?&]|[^ ]){8,15}$/;
+
+            // Usando test podemos verificar si el texto coincide
+            if (validEmail.test(emailField.value)) {
+
+                return true;
+            } else {
+                alert('password es invalido ');
+                return false;
+            }
+        }
+
+        var check = function () {
+            if (document.getElementById('password').value ==
+                document.getElementById('confirm_password').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Coinciden';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'No Coinciden';
+            }
+        }
+
+
+    </script>
 
     
 }
