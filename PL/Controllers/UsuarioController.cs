@@ -243,6 +243,13 @@ namespace PL.Controllers
             return Json(result.Objects);
         }
 
+        public JsonResult CambiarStatus(int IdUsuario, bool Status)
+        {
+            var result = BL.Usuario.ChangeStatus(IdUsuario, Status);
+
+            return Json(result.Objects);
+        }
+
         public static byte[] ConvertToBytes(IFormFile imagen)
         {
 

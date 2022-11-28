@@ -246,7 +246,7 @@ namespace BL
             return result;
         }
 
-        public static ML.Result ChangeStatus(ML.Usuario usuario)
+        public static ML.Result ChangeStatus(int IdUsuario, bool Status)
         {
             ML.Result result = new ML.Result();
             try
@@ -254,7 +254,7 @@ namespace BL
                 using (DL.AarteagaProgramacionNcapasContext context = new DL.AarteagaProgramacionNcapasContext())
                 {
                     //int query = context.UsuarioAdd(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno, usuario.FechaNacimiento, usuario.Genero, usuario.UserName, usuario.Email, usuario.Password, usuario.Telefono, usuario.Celular, usuario.CURP, usuario.Rol.IdRol, usuario.Imagen, usuario.Direccion.Calle, usuario.Direccion.NumeroInterior, usuario.Direccion.NumeroExterior, usuario.Direccion.Colonia.IdColonia);
-                    var usuarios = context.Database.ExecuteSqlRaw($"UsuarioChangeStatus {usuario.IdUsuario},{usuario.Status} ");
+                    var usuarios = context.Database.ExecuteSqlRaw($"UsuarioChangeStatus {IdUsuario},{Status} ");
 
                     if (usuarios > 0)
                     {
