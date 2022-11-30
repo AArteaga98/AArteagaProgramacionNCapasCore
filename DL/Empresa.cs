@@ -16,4 +16,6 @@ public partial class Empresa
     public string DireccionWeb { get; set; } = null!;
 
     public string? Logo { get; set; }
+
+    public virtual ICollection<Empleado> Empleados { get; } = new List<Empleado>();
 }

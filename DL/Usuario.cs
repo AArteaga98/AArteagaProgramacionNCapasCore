@@ -41,6 +41,7 @@ public partial class Usuario
 
     public virtual Rol? IdRolNavigation { get; set; }
 
+
     //Agregadas
     public string? RolNombre { get; set; }
     public int IdDirreccion { get; set; }
