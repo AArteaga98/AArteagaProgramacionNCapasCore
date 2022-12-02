@@ -169,6 +169,8 @@ namespace PL.Controllers
         //ADD
         public ActionResult Form(ML.Usuario usuario)
         {
+           
+
             IFormFile image = Request.Form.Files["IFImage"];
 
 
@@ -182,7 +184,24 @@ namespace PL.Controllers
             }
 
 
-            //Validacion 
+            string urlAPI = _configuration["UrlAPI"];
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlAPI);
+
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync("Usuario/Add", usuario);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("GetAll");
+                }
+            }
+
+
+            //Validacion
 
             if (ModelState.IsValid)
             {
@@ -222,7 +241,7 @@ namespace PL.Controllers
 
 
 
-              
+
             }
 
             else
@@ -247,23 +266,51 @@ namespace PL.Controllers
 
             }
 
-
+           
         }
 
         // delete
+        [HttpGet]
         public ActionResult Delete(int IdUsuario)
         {
-            //ML.Result result = BL.Usuario.Delete(IdUsuario);
-            if (IdUsuario >= 1)
+            ML.Result resultUsuario = new ML.Result();
+            ML.Usuario usuario = new ML.Usuario();
+            usuario.IdUsuario = IdUsuario;
+
+            string urlAPI = _configuration["UrlAPI"];
+            using (var client = new HttpClient())
             {
-                ML.Result result = BL.Usuario.Delete(IdUsuario);
-                ViewBag.Message = result.Message;
+                client.BaseAddress = new Uri(urlAPI);
+
+                //HTTP POST
+                var postTask = client.DeleteAsync("Usuario/Delete/" + IdUsuario);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "El usuario ha sido eliminado";
+                }
+                else
+                {
+                    ViewBag.Message = "El usuario no pudo ser eliminado" + resultUsuario.Message;
+                }
             }
-            else
-            {
-                ViewBag.Message = "ERROR: ";
-            }
+
             return PartialView("Modal");
+
+
+            ////ML.Result result = BL.Usuario.Delete(IdUsuario);
+            //if (IdUsuario >= 1)
+            //{
+            //    ML.Result result = BL.Usuario.Delete(IdUsuario);
+            //    ViewBag.Message = result.Message;
+            //}
+            //else
+            //{
+            //    ViewBag.Message = "ERROR: ";
+            //}
+            //return PartialView("Modal");
         }
 
 

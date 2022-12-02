@@ -151,6 +151,8 @@ namespace BL
                         usuario.Rol.Nombre = query.RolNombre;
                         usuario.Imagen = query.Imagen;
 
+                        //usuario.Status = row.Status.Value;
+
                         usuario.Direccion = new ML.Direccion();
                         usuario.Direccion.Colonia = new ML.Colonia();
                         usuario.Direccion.Colonia.Municipio = new ML.Municipio();

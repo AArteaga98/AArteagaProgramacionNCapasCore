@@ -99,7 +99,7 @@ namespace SL.Controllers
         }
 
         // DELETE api/<UsuarioController>/5
-        [HttpDelete("DeleteUsuario/{id}")]
+        [HttpDelete("Delete/{IdUsuario}")]
         //[Route("api/Usuario/Delete/{IdUsuario}")]
         public IActionResult Delete(int IdUsuario)
         {
