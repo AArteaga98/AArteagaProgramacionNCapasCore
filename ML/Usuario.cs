@@ -11,30 +11,30 @@ namespace ML
 {
     public class Usuario
     {
-        public string? Imagen { get; set; }
+
 
         public int IdUsuario { get; set; }
 
         [Required]
-        public string? Nombre { get; set; }
+        public string Nombre { get; set; }
        
         [Required]
         [DisplayName ("Apellido Paterno")]
-        public string? ApellidoPaterno { get; set; }
+        public string ApellidoPaterno { get; set; }
 
         [Required]
         [DisplayName("Apellido Materno")]
-        public string? ApellidoMaterno { get; set; }
+        public string ApellidoMaterno { get; set; }
 
         [Required]
         [DisplayName("Fecha de Nacimiento")]
-        public string? FechaNacimiento { get; set; }
+        public string FechaNacimiento { get; set; }
 
         [Required]
         public string Genero { get; set; }
 
         [Required]
-        public string? UserName { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         //[EmailAddress]
@@ -55,8 +55,9 @@ namespace ML
         public string? CURP { get; set; }
         public bool Status { get; set; }
 
+        public string? Imagen { get; set; }
 
-   
+
 
         public ML.Rol Rol { get; set; } //propiedad de navegacion 
         public ML.Direccion? Direccion { get; set; } //propiedad de navegacion 

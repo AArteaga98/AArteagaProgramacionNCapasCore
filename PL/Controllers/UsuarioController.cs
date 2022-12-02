@@ -205,16 +205,17 @@ namespace PL.Controllers
         }
 
         // delete
-        public ActionResult Delete(ML.Usuario usuario)
+        public ActionResult Delete(int IdUsuario)
         {
-            ML.Result result = BL.Usuario.Delete(usuario);
-            if (result.Correct)
+            //ML.Result result = BL.Usuario.Delete(IdUsuario);
+            if (IdUsuario >= 1)
             {
+                ML.Result result = BL.Usuario.Delete(IdUsuario);
                 ViewBag.Message = result.Message;
             }
             else
             {
-                ViewBag.Message = "ERROR: " + result.Message;
+                ViewBag.Message = "ERROR: ";
             }
             return PartialView("Modal");
         }

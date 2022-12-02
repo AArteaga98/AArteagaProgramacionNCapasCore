@@ -220,14 +220,14 @@ namespace BL
             return result;
         }
 
-        public static ML.Result Delete(ML.Usuario usuario)
+        public static ML.Result Delete(int IdUsuario)
         {
             ML.Result result = new ML.Result();
             try
             {
                 using (DL.AarteagaProgramacionNcapasContext context = new DL.AarteagaProgramacionNcapasContext())
                 {
-                    int query = context.Database.ExecuteSqlRaw($"UsuarioDelete {usuario.IdUsuario}");
+                    int query = context.Database.ExecuteSqlRaw($"UsuarioDelete { IdUsuario}");
 
                     if (query > 0)
                     {
