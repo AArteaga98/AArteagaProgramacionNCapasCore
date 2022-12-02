@@ -11,7 +11,7 @@ namespace SL.Controllers
     public class UsuarioController : ControllerBase
     {
         // GET: api/<UsuarioController>
-        [HttpGet]
+        [HttpGet("GetAll")] //Se tiene que agregar el GetAll para que entre al metodo
         public IActionResult GetAll()
         {
             ML.Usuario usuario = new ML.Usuario();

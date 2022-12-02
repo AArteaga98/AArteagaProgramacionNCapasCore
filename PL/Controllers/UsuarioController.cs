@@ -11,16 +11,64 @@ namespace PL.Controllers
 {
     public class UsuarioController : Controller
     {
+
+        private readonly IConfiguration _configuration;
+
+        private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment;
+
+        public UsuarioController(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
+        {
+            _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
+        }
+
         [HttpGet]
         public ActionResult GetAll()
         {
-            ML.Result result = new ML.Result();
+            ML.Result resultRol = BL.Rol.GetAll();
             ML.Usuario usuario = new ML.Usuario();
             usuario.Rol = new ML.Rol();
 
-            ML.Result resultRol = BL.Rol.GetAll();
+            ML.Result result = new ML.Result();
+            result.Objects = new List<Object>();
 
-            result = BL.Usuario.GetAll(usuario);
+
+            try
+            {
+                string urlAPI = _configuration["UrlAPI"];
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(urlAPI);
+
+                    //var responseTask = client.GetAsync("Usuario/GetAll"); 
+                    var responseTask = client.GetAsync("Usuario/GetAll");
+                    //result = bl.alumno.GetAll();
+
+                    responseTask.Wait();
+
+                    var resultServicio = responseTask.Result;
+
+                    if (resultServicio.IsSuccessStatusCode)
+                    {
+                        var readTask = resultServicio.Content.ReadAsAsync<ML.Result>();
+                        readTask.Wait();
+
+                        foreach (var resultItem in readTask.Result.Objects)
+                        {
+                            ML.Usuario resultItemList = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Usuario>(resultItem.ToString());
+                            result.Objects.Add(resultItemList);
+                        }
+
+                        result.Correct = true;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.Message = ex.Message;
+            }
             if (result.Correct)
             {
                 usuario.Rol.Roles = resultRol.Objects;
@@ -29,11 +77,9 @@ namespace PL.Controllers
             }
             else
             {
-                ViewBag.Message = "Ocurrio un error al realizar la consulta";
-                return View(usuario);
+                ViewBag.Mensaje = "Ocurrio un error al consultar los usuarios";
+                return View();
             }
-
-            
         }
 
         [HttpPost]
