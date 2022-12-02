@@ -225,6 +225,21 @@ namespace PL.Controllers
                 }
                 else
                 {
+                    //string urlAPI = _configuration["UrlAPI"];
+                    //using (var client = new HttpClient())
+                    //{
+                    //    client.BaseAddress = new Uri(urlAPI);
+
+                    //    //HTTP POST
+                    //    var postTask = client.PostAsJsonAsync<ML.Usuario>("Usuario/update", usuario.IdUsuario, usuario);
+                    //    postTask.Wait();
+
+                    //    var result = postTask.Result;
+                    //    if (result.IsSuccessStatusCode)
+                    //    {
+                    //        return RedirectToAction("GetAll");
+                    //    }
+
                     result = BL.Usuario.Update(usuario);
                     if (result.Correct)
                     {

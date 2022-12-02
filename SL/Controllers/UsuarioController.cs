@@ -75,7 +75,7 @@ namespace SL.Controllers
         }
 
         // POST api/<UsuarioController>
-        [HttpPost("add")]
+        [HttpPost("Add")]
         public IActionResult Post([FromBody] ML.Usuario usuario)
         {
             ML.Result result = BL.Usuario.Add(usuario);
@@ -94,8 +94,20 @@ namespace SL.Controllers
 
         // PUT api/<UsuarioController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int IdUsuario, [FromBody] ML.Usuario usuario)
         {
+            ML.Result result = BL.Usuario.Update(usuario);
+            usuario.IdUsuario= IdUsuario;
+
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+
         }
 
         // DELETE api/<UsuarioController>/5
