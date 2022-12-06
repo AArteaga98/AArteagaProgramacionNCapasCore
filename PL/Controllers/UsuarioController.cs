@@ -225,6 +225,8 @@ namespace PL.Controllers
                 }
                 else
                 {
+                    //ACTUALIZAR POR SERVICIOS
+
                     //string urlAPI = _configuration["UrlAPI"];
                     //using (var client = new HttpClient())
                     //{
