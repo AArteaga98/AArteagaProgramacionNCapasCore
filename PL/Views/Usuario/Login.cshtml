@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = null;
+}
+<link rel="stylesheet" type="text/css" href="~/css/Login.css" asp-append-version="true" 
+/>
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  @*  <link rel="stylesheet" href="~/css/Login.css">*@
+
+ 
+    
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <h2 class="active"> Sign In </h2>
+            <h2 class="inactive underlineHover">Sign Up </h2>
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+            </div>
+
+            <!-- Login Form -->
+            <form>
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+                <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+        $(document).ready(function () {
+            var panelOne = $('.form-panel.two').height(),
+                panelTwo = $('.form-panel.two')[0].scrollHeight;
+
+            $('.form-panel.two').not('.form-panel.two.active').on('click', function (e) {
+                e.preventDefault();
+
+                $('.form-toggle').addClass('visible');
+                $('.form-panel.one').addClass('hidden');
+                $('.form-panel.two').addClass('active');
+                $('.form').animate({
+                    'height': panelTwo
+                }, 200);
+            });
+
+            $('.form-toggle').on('click', function (e) {
+                e.preventDefault();
+                $(this).removeClass('visible');
+                $('.form-panel.one').removeClass('hidden');
+                $('.form-panel.two').removeClass('active');
+                $('.form').animate({
+                    'height': panelOne
+                }, 200);
+            });
+        });
+</script>
+</body>
+</html>

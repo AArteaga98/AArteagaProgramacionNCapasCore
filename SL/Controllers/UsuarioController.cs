@@ -93,12 +93,12 @@ namespace SL.Controllers
         }
 
         // PUT api/<UsuarioController>/5
-        [HttpPut("{id}")]
+        [HttpPut("Update/{idUsuario}")]
         public IActionResult Put(int IdUsuario, [FromBody] ML.Usuario usuario)
         {
-            ML.Result result = BL.Usuario.Update(usuario);
+            
             usuario.IdUsuario= IdUsuario;
-
+            ML.Result result = BL.Usuario.Update(usuario);
             if (result.Correct)
             {
                 return Ok(result);

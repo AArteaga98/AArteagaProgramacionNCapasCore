@@ -183,22 +183,26 @@ namespace PL.Controllers
                 usuario.Imagen = Convert.ToBase64String(ImagenBytes);
             }
 
+            //if (usuario.IdUsuario == 0)
+            //{
 
-            string urlAPI = _configuration["UrlAPI"];
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(urlAPI);
 
-                //HTTP POST
-                var postTask = client.PostAsJsonAsync("Usuario/Add", usuario);
-                postTask.Wait();
+            //string urlAPI = _configuration["UrlAPI"];
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri(urlAPI);
 
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("GetAll");
-                }
-            }
+            //    //HTTP POST
+            //    var postTask = client.PostAsJsonAsync<ML.Usuario>("Usuario/Add", usuario);
+            //    postTask.Wait();
+
+            //    var resultservicio = postTask.Result;
+            //    if (resultservicio.IsSuccessStatusCode)
+            //    {
+            //        return RedirectToAction("GetAll");
+            //    }
+            //}
+            //}
 
 
             //Validacion
@@ -225,22 +229,7 @@ namespace PL.Controllers
                 }
                 else
                 {
-                    //ACTUALIZAR POR SERVICIOS
 
-                    //string urlAPI = _configuration["UrlAPI"];
-                    //using (var client = new HttpClient())
-                    //{
-                    //    client.BaseAddress = new Uri(urlAPI);
-
-                    //    //HTTP POST
-                    //    var postTask = client.PostAsJsonAsync<ML.Usuario>("Usuario/update", usuario.IdUsuario, usuario);
-                    //    postTask.Wait();
-
-                    //    var result = postTask.Result;
-                    //    if (result.IsSuccessStatusCode)
-                    //    {
-                    //        return RedirectToAction("GetAll");
-                    //    }
 
                     result = BL.Usuario.Update(usuario);
                     if (result.Correct)
@@ -283,7 +272,7 @@ namespace PL.Controllers
 
             }
 
-           
+
         }
 
         // delete
@@ -372,6 +361,11 @@ namespace PL.Controllers
             return bytes;
         }
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
 
     }
 }
